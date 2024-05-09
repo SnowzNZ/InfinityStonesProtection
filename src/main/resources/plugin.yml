@@ -1,0 +1,8 @@
+name: InfinityStonesProtection
+version: '${project.version}'
+main: dev.snowz.infinitystonesprotection.InfinityStonesProtection
+api-version: 1.17
+author: SnowzNZ
+depend:
+  - InfinityStones
+  - CustomCrafting
