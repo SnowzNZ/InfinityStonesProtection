@@ -1,7 +1,7 @@
 name: InfinityStonesProtection
 version: '${project.version}'
 main: dev.snowz.infinitystonesprotection.InfinityStonesProtection
-api-version: 1.17
+api-version: "1.20"
 author: SnowzNZ
 depend:
   - InfinityStones
