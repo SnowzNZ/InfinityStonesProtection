@@ -85,7 +85,7 @@ public class InfinityStonesProtection extends JavaPlugin implements Listener {
 
     }
 
-    @EventHandler()
+    @EventHandler
     public void onInventoryPickupItem(InventoryPickupItemEvent e) {
         if (e.getInventory().getHolder() instanceof Hopper && droppedItems.contains(e.getItem())) {
             e.setCancelled(true);
