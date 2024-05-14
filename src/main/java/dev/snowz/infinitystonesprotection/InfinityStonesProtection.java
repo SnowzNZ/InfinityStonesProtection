@@ -1,5 +1,6 @@
 package dev.snowz.infinitystonesprotection;
 
+import dev.snowz.infinitystonesprotection.commands.ReloadCommand;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -23,6 +24,7 @@ import java.util.Objects;
 
 public class InfinityStonesProtection extends JavaPlugin implements Listener {
 
+    private static InfinityStonesProtection plugin;
     private final Map<String, Material> infinityStones = new HashMap<String, Material>() {{
         put("§eMind Stone", Material.YELLOW_DYE);
         put("§cReality Stone", Material.RED_DYE);
@@ -35,10 +37,19 @@ public class InfinityStonesProtection extends JavaPlugin implements Listener {
     private final ArrayList<Item> droppedItems = new ArrayList<>();
     private final PotionEffect glowingEffect = new PotionEffect(PotionEffectType.GLOWING, 20 * getConfig().getInt("durationInSeconds"), 1);
 
+    public static InfinityStonesProtection getPlugin() {
+        return plugin;
+    }
+
     @Override
     public void onEnable() {
+        plugin = this;
+
         saveDefaultConfig();
+
         getServer().getPluginManager().registerEvents(this, this);
+
+        getCommand("ispreload").setExecutor(new ReloadCommand());
     }
 
     @EventHandler
