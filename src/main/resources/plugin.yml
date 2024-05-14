@@ -2,7 +2,7 @@ name: InfinityStonesProtection
 version: '${project.version}'
 main: dev.snowz.infinitystonesprotection.InfinityStonesProtection
 author: SnowzNZ
-description: You have to protect the infinity stones!
+description: Protect your Infinity Stones after crafting them!
 website: https://github.com/SnowzNZ/InfinityStonesProtection
 api-version: "1.20"
 depend:
