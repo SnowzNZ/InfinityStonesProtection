@@ -70,7 +70,6 @@ public class InfinityStonesProtection extends JavaPlugin implements Listener {
                     droppedItems.remove(droppedItem);
                 }
             }.runTaskLater(this, 20L * getConfig().getInt("durationInSeconds"));
-            System.out.println(droppedItems);
 
             if (getConfig().getBoolean("glowing")) {
                 player.addPotionEffect(glowingEffect);
