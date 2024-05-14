@@ -9,6 +9,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.ItemDespawnEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
@@ -98,6 +99,13 @@ public class InfinityStonesProtection extends JavaPlugin implements Listener {
     @EventHandler
     public void onInventoryPickupItem(InventoryPickupItemEvent e) {
         if (e.getInventory().getHolder() instanceof Hopper && droppedItems.contains(e.getItem())) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onItemDespawn(ItemDespawnEvent e) {
+        if (droppedItems.contains(e.getEntity())) {
             e.setCancelled(true);
         }
     }
