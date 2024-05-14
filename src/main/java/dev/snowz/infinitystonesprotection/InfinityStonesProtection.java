@@ -90,7 +90,7 @@ public class InfinityStonesProtection extends JavaPlugin implements Listener {
                 world.strikeLightningEffect(location);
             }
 
-            getServer().broadcastMessage("§c§l" + player.getName() + "§r has crafted a " + craftedItem.getItemMeta().getDisplayName() + "§r at §b" + Math.round(location.getX()) + ", " + Math.round(location.getY()) + ", " + Math.round(location.getZ()) + "§r.");
+            getServer().broadcastMessage("§c" + player.getName() + "§r has crafted a " + craftedItem.getItemMeta().getDisplayName() + "§r at §b" + Math.round(location.getX()) + ", " + Math.round(location.getY()) + ", " + Math.round(location.getZ()));
         }
 
     }
