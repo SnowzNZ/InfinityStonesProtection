@@ -26,7 +26,7 @@ import java.util.Objects;
 public class InfinityStonesProtection extends JavaPlugin implements Listener {
 
     private static InfinityStonesProtection plugin;
-    private final Map<String, Material> infinityStones = new HashMap<String, Material>() {{
+    private final Map<String, Material> infinityStones = new HashMap<>() {{
         put("§eMind Stone", Material.YELLOW_DYE);
         put("§cReality Stone", Material.RED_DYE);
         put("§6Soul Stone", Material.ORANGE_DYE);
@@ -50,7 +50,7 @@ public class InfinityStonesProtection extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(this, this);
 
-        getCommand("ispreload").setExecutor(new ReloadCommand());
+        Objects.requireNonNull(getCommand("ispreload")).setExecutor(new ReloadCommand());
     }
 
     @EventHandler
@@ -72,7 +72,8 @@ public class InfinityStonesProtection extends JavaPlugin implements Listener {
             Location location = player.getLocation();
 
             Item droppedItem = world.dropItem(location, craftedItem);
-            droppedItem.setPickupDelay(20 * getConfig().getInt("durationInSeconds"));
+            int durationInSeconds = getConfig().getInt("durationInSeconds");
+            droppedItem.setPickupDelay(20 * durationInSeconds);
             droppedItem.setInvulnerable(true);
 
             droppedItems.add(droppedItem);
@@ -80,8 +81,10 @@ public class InfinityStonesProtection extends JavaPlugin implements Listener {
                 @Override
                 public void run() {
                     droppedItems.remove(droppedItem);
+                    droppedItem.setInvulnerable(false);
+                    droppedItem.setPickupDelay(0);
                 }
-            }.runTaskLater(this, 20L * getConfig().getInt("durationInSeconds"));
+            }.runTaskLater(this, 20L * durationInSeconds);
 
             if (getConfig().getBoolean("glowing")) {
                 player.addPotionEffect(glowingEffect);
@@ -105,7 +108,7 @@ public class InfinityStonesProtection extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onItemDespawn(ItemDespawnEvent e) {
-        if (droppedItems.contains(e.getEntity())) {
+        if (e.getEntity().getTicksLived() < 20 * (getConfig().getInt("durationInSeconds") + 300) && droppedItems.contains(e.getEntity())) {
             e.setCancelled(true);
         }
     }
